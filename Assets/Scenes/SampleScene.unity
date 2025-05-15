@@ -269,10 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab0d81acdbdd3c49bd6323d04a9c3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1338460679}
   distance: 5
-  speed: 20
-  inputAsset: {fileID: 0}
+  speed: 75
+  inputAsset: {fileID: -944628639613478452, guid: 5b1d3867e3a88c04f8f76f92c852df42, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
