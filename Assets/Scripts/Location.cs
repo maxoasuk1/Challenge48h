@@ -3,6 +3,8 @@ using UnityEngine;
 public class Location : MonoBehaviour
 {
     [SerializeField] private ObjectToWear obj;
+    [SerializeField] private Quaternion rotation;
+    [SerializeField] private GameObject fragement;
     private GameObject _player;
 
     private bool _isWear;
@@ -22,8 +24,10 @@ public class Location : MonoBehaviour
         if (_player is not null && Input.GetKey(KeyCode.E) && obj.IsGet())
         {
             obj.transform.position = transform.position;
+            obj.transform.rotation = rotation;
             _isWear = true;
             obj.wear();
+            fragement.SetActive(true);
         }
     }
     
