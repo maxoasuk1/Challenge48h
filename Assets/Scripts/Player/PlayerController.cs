@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKey(jumpKey) && grounded)
+        if(Input.GetKeyDown(jumpKey) && grounded)
         {
             Jump();
         }
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         SpeedControl();
 
         //Ground Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.05f, whatIsGround);
         if(grounded)
         {
             rb.linearDamping = groundDrag;
