@@ -9,7 +9,7 @@ public class ObjectController : MonoBehaviour
     void Start()
     {
         _player = null;
-        if (Score.instance.ScoreIsGet(ScoreId))
+        if (Score.instance && Score.instance.ScoreIsGet(ScoreId))
         {
             Destroy(this.gameObject);
         }
@@ -21,7 +21,8 @@ public class ObjectController : MonoBehaviour
         if (_player is not null && Input.GetKey(KeyCode.E))
         {
             Destroy(this.gameObject);
-            Score.instance.IncrementScore(ScoreId);
+            if (Score.instance)
+                Score.instance.IncrementScore(ScoreId);
         }   
     }
     

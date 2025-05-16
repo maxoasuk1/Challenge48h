@@ -621,7 +621,7 @@ MonoBehaviour:
   playerObject: {fileID: 1557265674}
   rb: {fileID: 2092170393}
   rotationSpeed: 7
-  distance: 40
+  distance: 20
   speed: 75
   inputAsset: {fileID: -944628639613478452, guid: 5b1d3867e3a88c04f8f76f92c852df42, type: 3}
 --- !u!1 &410087039

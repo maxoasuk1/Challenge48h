@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         rotateY.performed += RotateYCallback;
         rotateY.canceled += RotateYCallback;
         
-        transform.position = target.position + new Vector3(0.0f, 0.0f, -distance);
+        transform.position = target.position + new Vector3(0.0f, 100.0f, -distance);
         transform.LookAt(target);
     }
 
