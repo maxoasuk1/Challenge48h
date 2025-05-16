@@ -13,6 +13,10 @@ public class Score : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     public static Score instance;
+
+    [SerializeField] private GameObject cloudObject; // Assign in Inspector
+    private bool cloudSpawned = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -42,9 +46,29 @@ public class Score : MonoBehaviour
 
     public void IncrementScore(int value)
     {
-        ScoreValue++;
-        DicPtsScore[value] = true;
+        if (!DicPtsScore[value])
+        {
+            ScoreValue++;
+            FindFirstObjectByType<AudioManager>().Play("Fragment");
+            DicPtsScore[value] = true;
+
+            // Si le score est max et que le nuage n'a pas encore été activé
+            if (ScoreValue >= ScoreMax && !cloudSpawned)
+            {
+                if (cloudObject != null)
+                {
+                    cloudObject.SetActive(true);
+                    Debug.Log("Nuage activé !");
+                }
+                else
+                {
+                    Debug.LogWarning("cloudObject non assigné dans l'inspecteur !");
+                }
+                cloudSpawned = true;
+            }
+        }
     }
+
 
     public bool ScoreIsGet(int value)
     {

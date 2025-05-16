@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -23,49 +22,45 @@ public class PlayerController : MonoBehaviour
     bool grounded;
 
     Rigidbody rb;
+    Animator animator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        // Assure-toi que l'Animator est bien sur le même GameObject ou sur un enfant
+        animator = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Movement
+        // Inputs
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKeyDown(jumpKey) && grounded)
+        // Jump
+        if (Input.GetKeyDown(jumpKey) && grounded)
         {
             Jump();
         }
 
         MovePlayer();
         SpeedControl();
+        UpdateAnimation();
 
-        //Ground Check
+        // Ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.05f, whatIsGround);
-        if(grounded)
-        {
-            rb.linearDamping = groundDrag;
-        }
-        else
-        {
-            rb.linearDamping = 0;
-        }
+        rb.linearDamping = grounded ? groundDrag : 0f;
     }
 
     private void MovePlayer()
     {
-        // calculate move direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        
-        if(grounded)
+
+        if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        else if (!grounded)
+        else
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
@@ -73,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        if(flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
@@ -84,5 +79,14 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void UpdateAnimation()
+    {
+        // On utilise la vitesse de déplacement comme paramètre pour l'Animator
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        float speed = flatVel.magnitude;
+
+        animator.SetFloat("Speed", speed);
     }
 }
