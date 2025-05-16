@@ -10,9 +10,7 @@ public class PlayerController : MonoBehaviour
     float verticalInput;
     Vector3 moveDirection;
     public float jumpForce;
-    public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
 
     [Header("Ground Check")]
     public float groundDrag;
@@ -31,7 +29,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        ResetJump();
     }
 
     // Update is called once per frame
@@ -41,18 +38,16 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && grounded)
         {
-            readyToJump = false;
             Jump();
-            Invoke(nameof(ResetJump), jumpCooldown);
         }
 
         MovePlayer();
         SpeedControl();
 
         //Ground Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f, whatIsGround);
         if(grounded)
         {
             rb.linearDamping = groundDrag;
@@ -89,10 +84,5 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-    }
-
-    private void ResetJump()
-    {
-        readyToJump = true;
     }
 }
