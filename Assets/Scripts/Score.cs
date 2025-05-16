@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Score : MonoBehaviour
 
     [SerializeField] private GameObject cloudObject; // Assign in Inspector
     private bool cloudSpawned = false;
+
 
     private void Awake()
     {
@@ -69,6 +71,10 @@ public class Score : MonoBehaviour
         }
     }
 
+    public bool IsScoreMax()
+    {
+        return ScoreValue >= ScoreMax;
+    }
 
     public bool ScoreIsGet(int value)
     {

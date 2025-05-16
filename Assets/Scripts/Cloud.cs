@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class CLoud : MonoBehaviour
+public class Cloud : MonoBehaviour
 {
     [Header("Paramètres de montée")]
     [SerializeField] private float liftSpeed = 1f;
@@ -38,6 +39,11 @@ public class CLoud : MonoBehaviour
 
     private void Update()
     {
+        if (Score.instance.IsScoreMax())
+        {
+            gameObject.SetActive(true);
+        }
+
         if (isLifting)
         {
             transform.position = Vector3.MoveTowards(transform.position, cloudTargetPosition, liftSpeed * Time.deltaTime);
@@ -53,7 +59,7 @@ public class CLoud : MonoBehaviour
                 isLifting = false;
 
                 if (solidCollider != null)
-                    solidCollider.enabled = true; // On rend le nuage solide
+                    solidCollider.enabled = true;
 
                 Debug.Log("Nuage arrivé à destination !");
                 FindFirstObjectByType<AudioManager>().Play("Bell");

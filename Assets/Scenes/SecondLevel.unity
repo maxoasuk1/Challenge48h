@@ -466,7 +466,7 @@ MonoBehaviour:
   rb: {fileID: 2021363277}
   rotationSpeed: 7
   distance: 5
-  speed: 75
+  speed: 150
   inputAsset: {fileID: -944628639613478452, guid: 5b1d3867e3a88c04f8f76f92c852df42, type: 3}
 --- !u!1 &410087039
 GameObject:
@@ -1559,7 +1559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929745dff8ce0c447884f2d69863df91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 2
   orientation: {fileID: 2077957613}
   jumpForce: 1
   airMultiplier: 0.4

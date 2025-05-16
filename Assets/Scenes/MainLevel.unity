@@ -616,7 +616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bc5b9375a19fd4f4880ce325454549e5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab5504012993ee43a34d6f3862fe5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreMax: 3
+  ScoreMax: 2
   ScoreText: {fileID: 406402613}
   cloudObject: {fileID: 1269999077}
 --- !u!114 &406402613
@@ -2169,6 +2169,7 @@ GameObject:
   - component: {fileID: 2092170393}
   - component: {fileID: 2092170392}
   - component: {fileID: 2092170395}
+  - component: {fileID: 2092170396}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2265,6 +2266,28 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!95 &2092170396
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092170391}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b8c95a07651a9f64994ea5b191fe0618, type: 3}
+  m_Controller: {fileID: 9100000, guid: 08c55d828cc59cc44891b9f052078517, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2134218773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4911860df8146db498c572fd79b830df, type: 3}
