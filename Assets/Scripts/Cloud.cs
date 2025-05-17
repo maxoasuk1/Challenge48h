@@ -7,12 +7,10 @@ public class Cloud : MonoBehaviour
     [SerializeField] private float liftSpeed = 1f;
     [SerializeField] private Transform playerTransform;
 
-    [Tooltip("Position finale que doit atteindre le nuage (à définir dans l'inspecteur)")]
     [SerializeField] private Vector3 cloudTargetPosition;
 
     [Header("Composants")]
-    [Tooltip("Ce collider doit être un BoxCollider NON trigger qui représente la surface solide du nuage.")]
-    [SerializeField] private Collider solidCollider; // À assigner dans l'inspecteur
+    [SerializeField] private Collider solidCollider;
 
     private bool isLifting = false;
 
@@ -20,7 +18,7 @@ public class Cloud : MonoBehaviour
     {
         if (solidCollider != null)
         {
-            solidCollider.enabled = false; // On désactive le sol au départ
+            solidCollider.enabled = false;
         }
     }
 
@@ -39,11 +37,6 @@ public class Cloud : MonoBehaviour
 
     private void Update()
     {
-        if (Score.instance.IsScoreMax())
-        {
-            gameObject.SetActive(true);
-        }
-
         if (isLifting)
         {
             transform.position = Vector3.MoveTowards(transform.position, cloudTargetPosition, liftSpeed * Time.deltaTime);
@@ -63,6 +56,7 @@ public class Cloud : MonoBehaviour
 
                 Debug.Log("Nuage arrivé à destination !");
                 FindFirstObjectByType<AudioManager>().Play("Bell");
+                FindFirstObjectByType<EndGameUI>().TriggerEnd(true);
             }
         }
     }

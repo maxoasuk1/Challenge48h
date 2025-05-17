@@ -22,14 +22,11 @@ public class PlayerController : MonoBehaviour
     bool grounded;
 
     Rigidbody rb;
-    Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
-        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -85,7 +82,5 @@ public class PlayerController : MonoBehaviour
         // On utilise la vitesse de déplacement comme paramètre pour l'Animator
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         float speed = flatVel.magnitude;
-
-        animator.SetFloat("Speed", speed);
     }
 }

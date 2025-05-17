@@ -1559,9 +1559,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929745dff8ce0c447884f2d69863df91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1
   orientation: {fileID: 2077957613}
-  jumpForce: 1
+  jumpForce: 4
   airMultiplier: 0.4
   groundDrag: 5
   playerHeight: 2

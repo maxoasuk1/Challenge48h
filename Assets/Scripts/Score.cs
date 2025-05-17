@@ -5,19 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
-    
     private int ScoreValue;
     [SerializeField] private int ScoreMax;
     [SerializeField] public TextMeshProUGUI ScoreText;
 
     private Dictionary<int, bool> DicPtsScore;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
+
     public static Score instance;
 
-    [SerializeField] private GameObject cloudObject; // Assign in Inspector
-    private bool cloudSpawned = false;
-
+    public bool finalFragmentShouldBeActive = false;
+    public bool cloudShouldBeActive = false;
 
     private void Awake()
     {
@@ -31,6 +28,7 @@ public class Score : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     void Start()
     {
         DicPtsScore = new Dictionary<int, bool>();
@@ -40,7 +38,6 @@ public class Score : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         ScoreText.text = ScoreValue.ToString() + "/" + ScoreMax.ToString();
@@ -54,26 +51,17 @@ public class Score : MonoBehaviour
             FindFirstObjectByType<AudioManager>().Play("Fragment");
             DicPtsScore[value] = true;
 
-            // Si le score est max et que le nuage n'a pas encore été activé
-            if (ScoreValue >= ScoreMax && !cloudSpawned)
+            if (ScoreValue >= 2 && !finalFragmentShouldBeActive)
             {
-                if (cloudObject != null)
-                {
-                    cloudObject.SetActive(true);
-                    Debug.Log("Nuage activé !");
-                }
-                else
-                {
-                    Debug.LogWarning("cloudObject non assigné dans l'inspecteur !");
-                }
-                cloudSpawned = true;
+                finalFragmentShouldBeActive = true;
+            }
+
+            if (ScoreValue >= ScoreMax)
+            {
+                cloudShouldBeActive = true;
+                SceneManager.LoadScene("MainLevel");
             }
         }
-    }
-
-    public bool IsScoreMax()
-    {
-        return ScoreValue >= ScoreMax;
     }
 
     public bool ScoreIsGet(int value)

@@ -38,6 +38,7 @@ public class CountdownTimer : MonoBehaviour
             UpdateTimerDisplay();
             //fin du jeu
             Debug.Log("Temps écoulé !");
+            FindFirstObjectByType<EndGameUI>().TriggerEnd(false);
         }
     }
 
